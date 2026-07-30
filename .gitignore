@@ -8,7 +8,6 @@ backend/.phpunit.result.cache
 backend/public/hot
 backend/public/storage
 backend/storage/app/public
-backend/bootstrap/cache/
 
 # Frontend
 frontend/node_modules/
