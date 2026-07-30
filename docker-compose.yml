@@ -10,7 +10,6 @@ services:
     environment:
       APP_ENV: local
       APP_DEBUG: "true"
-      APP_KEY: base64:NG2xs7fQOfNNQX7bF1ZPBf9N//gI3jnAoKJm5MuAdhw=
       DB_CONNECTION: mysql
       DB_HOST: db
       DB_PORT: 3306
@@ -18,7 +17,8 @@ services:
       DB_USERNAME: shortener
       DB_PASSWORD: secret
     depends_on:
-      - db
+      db: 
+        condition: service_healthy    
     command: sh -c "composer install --no-interaction --prefer-dist && php artisan key:generate --force && php artisan migrate --force && php-fpm"
 
   web:
@@ -40,6 +40,12 @@ services:
       MYSQL_USER: shortener
       MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: root
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
     ports:
       - "3306:3306"
     volumes:

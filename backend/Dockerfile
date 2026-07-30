@@ -10,4 +10,6 @@ WORKDIR /var/www
 
 COPY . /var/www
 
+RUN usermod -u 1000 www-data
+
 RUN chown -R www-data:www-data /var/www
