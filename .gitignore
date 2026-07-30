@@ -2,7 +2,7 @@
 backend/vendor/
 backend/node_modules/
 backend/storage/*.key
-#backend/.env
+# backend/.env
 backend/.env.backup
 backend/.phpunit.result.cache
 backend/public/hot
